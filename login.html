@@ -10,7 +10,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg">
-                <form  method="POST" >
+                
                     <div class="row">
                         <div class="col">
                             <label>email:</label><input id="Email" type="email">
@@ -19,37 +19,42 @@
                             <label>password:</label><input id ="pass" type="password">
                         </div>
                         <div class="col">
-                            <button class="btn btn-lg">LogIn</button>
+                            <button  class="btn btn-lg">LogIn</button>
                         </div>
                     </div>
-                </form>
+                
             </div>
         </nav>
     <script>
-    
-        document.getElementById("Email").defaultValue="roushan@gmail.com";
-        document.getElementById("pass").defaultValue = "roushan";
-        var btn=document.getElementsByTagName("button");
-        btn.onclick=handleToken;
+        var email=document.getElementById("Email").defaultValue="roushan@gmail.com";
+        var pass=document.getElementById("pass").defaultValue = "roushan";
+        var btn=document.getElementsByTagName("button")[0];
         var handleToken=function()
-        {
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("POST","https://56y1lomy27.execute-api.ap-south-1.amazonaws.com/v1/login1", true);
-            xhttp.send();
-            xhttp.onreadystatechange = function() {
-              if (this.readyState == 4 && this.status == 200) {
-               var token = this.responseText;
-               
-               window.location="vrook.html"
-              }
-              else{
-                  window.alert("wrong username or password");
-                  window.location="vrook.html"
-              }
-            };
-            
+        {   window.location='vrook.html';
 
+            console.log("inside func");
+             var xhttp = new XMLHttpRequest();
+             xhttp.open("GET","https://56y1lomy27.execute-api.ap-south-1.amazonaws.com/v1/login1?email:"+email+"&password:"+pass, true);
+             xhttp.send();
+             xhttp.onreadystatechange = function() {
+                 console.log("ready func.");
+                 console.log(this.readyState);
+                 console.log(this.status);
+                 console.log(document.cookie);
+               if (this.readyState == 4 && this.status == 200) {
+                document.cookie = this.responseText;
+                console.log(document.cookie);
+                window.location.href="vrook.html";
+               }
+               else{
+                   window.alert("wrong username or password");
+                   window.location.href="vrook.html";
+               }
+             };
         }
+        btn.addEventListener("click",handleToken);
+
+        
     </script>  
     </body>
 </html>

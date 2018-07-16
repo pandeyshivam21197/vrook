@@ -84,22 +84,25 @@ var incompleteTask=function()
 
 var bindTaskEvents=function(itemList,checkboxhandle)
 {
-    var checkb=itemList.querySelector('input[type="checkbox"]');
-    var editbtn=itemList.querySelector("button.edit");
-    var delebtn=itemList.querySelector("button.delete");
+    var il=itemList;
+    console.log(il);
+    var checkb= il.querySelector('input[type="checkbox"]');
+    var editbtn=il.querySelector("button.edit");
+    var delebtn=il.querySelector("button.delete");
 
     editbtn.onclick=editTask;
     delebtn.onclick=deleteTask;
     checkb.onchange=checkboxhandle;
 }
-console.log(incompletelist);
+// console.log(incompletelist.childre);
 
-for (var i=0; i<incompletelist.children.length ;i++){
+for (var i=0; i<=incompletelist.children.length ;i++){
 
     
     bindTaskEvents(incompletelist.children[i],completeTask);
 }
-for (var i=0; i<completelist.children.length ;i++){
+// console.log(completelist.children);
+for (var i=0; i<=completelist.children.length ;i++){
 	
 		bindTaskEvents(completelist.children[i],incompleteTask);
 	}
