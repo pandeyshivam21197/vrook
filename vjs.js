@@ -21,9 +21,16 @@ var createTaskStructure=function(labelName){
     delebtn.className="delete";
     editbtn.className="edit";
 
-
-
-
+    listItem.appendChild(chkbx);
+    listItem.appendChild(label);
+    listItem.appendChild(txtinp);
+    listItem.appendChild(delebtn);
+    listItem.appendChild(editbtn);
+}
+var addTask=function(){
+    console.log("adding task inside incomplete list..")
+    var listItem=createTaskStructure(newTask.value);
+    incompletelist.appendChild(listItem);
 
 
 
