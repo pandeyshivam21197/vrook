@@ -31,7 +31,28 @@ var addTask=function(){
     console.log("adding task inside incomplete list..")
     var listItem=createTaskStructure(newTask.value);
     incompletelist.appendChild(listItem);
+    bindTaskEvents(listItem,completeTask);
+}
+var editTask=function(){
 
+    var itemList=this.parentNode;
+    var editInput=itemList.querySelector('input[type="text"]')
+    var label=itemList.querySelector("label");
+    var contclassedit=itemList.classList.contains("edit");       //classList returns class names 
+    if(contclassedit)
+    {
+        label.innerText=editInput.value;
 
+    }
+    else{
+        editInput.value=label.innerText;
 
+    }
+
+}
+var deleteTask=function()
+{
+    var itemList=this.parentNode;
+    var ul=itemList.parentNode;
+    ul.removeChild(itemList);
 }
