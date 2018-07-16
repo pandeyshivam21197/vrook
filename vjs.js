@@ -4,7 +4,7 @@ var incompletelist=document.getElementById("incomplete-tasks");
 var completelist=document.getElementById("completed-taks");
 //createTaskStructure,addtask,editTask
 addButton.addEventListener("click",addTask);
-
+//creating child(li) structure of UL
 var createTaskStructure=function(labelName){
     console.log("structure created..")
     var listItem=document.createElement("li");
@@ -70,4 +70,15 @@ var incompleteTask=function()
     var itemList=this.parentNode;
     completelist.appendChild(itemList);
     bindTaskEvents(itemList,completeTask);
+}
+
+var bindTaskEvents=function(itemList,checkboxhandle)
+{
+    var checkb=itemList.querySelector('input[type="checkbox"]');
+    var editbtn=itemList.querySelector("button.edit");
+    var delebtn=itemList.querySelector("button.delete");
+
+    editbtn.onclick=editTask;
+    delebtn.onclick=deleteTask;
+    checkb.onchange=checkboxhandle;
 }
