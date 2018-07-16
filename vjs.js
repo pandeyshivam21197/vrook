@@ -77,6 +77,7 @@ var completeTask=function()
 var incompleteTask=function()
 {
     var itemList=this.parentNode;
+    console.log(itemList);
     completelist.appendChild(itemList);
     bindTaskEvents(itemList,completeTask);
 }
@@ -91,13 +92,14 @@ var bindTaskEvents=function(itemList,checkboxhandle)
     delebtn.onclick=deleteTask;
     checkb.onchange=checkboxhandle;
 }
+console.log(incompletelist);
 
-for (var i=0; i<incompletelist.children.length;i++){
+for (var i=0; i<incompletelist.children.length ;i++){
 
-    //bind events to list items of incomlete list
+    
     bindTaskEvents(incompletelist.children[i],completeTask);
 }
-for (var i=0; i<completelist.children.length;i++){
-	//bind events to list items of complete list
+for (var i=0; i<completelist.children.length ;i++){
+	
 		bindTaskEvents(completelist.children[i],incompleteTask);
 	}
