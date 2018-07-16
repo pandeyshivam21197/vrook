@@ -3,7 +3,7 @@ var addbutton=document.getElementsByTagName("button")[0];
 var incompletelist=document.getElementById("incomplete-tasks");
 var completelist=document.getElementById("completed-taks");
 //createTaskStructure,addtask,editTask
-addButton.addEventListener("click",addTask);
+addbutton.addEventListener("click",addTask);
 //creating child(li) structure of UL
 var createTaskStructure=function(labelName){
     console.log("structure created..")
@@ -24,12 +24,14 @@ var createTaskStructure=function(labelName){
     listItem.appendChild(chkbx);
     listItem.appendChild(label);
     listItem.appendChild(txtinp);
-    listItem.appendChild(delebtn);
     listItem.appendChild(editbtn);
+    listItem.appendChild(delebtn);
+    
+    return listItem;
 }
 var addTask=function(){
-    console.log("adding task inside incomplete list..")
     var listItem=createTaskStructure(newTask.value);
+    console.log("adding task inside incomplete list..")
     incompletelist.appendChild(listItem);
     bindTaskEvents(listItem,completeTask);
 }
@@ -52,9 +54,16 @@ var editTask=function(){
 }
 var deleteTask=function()
 {
+    if(confirm("are sure ,you want to delete?"))
+    {
     var itemList=this.parentNode;
     var ul=itemList.parentNode;
     ul.removeChild(itemList);
+    window.alert("deleted!");
+    }
+    else{
+        window.alert("you pressed cancel");
+    }
 }
 //complete and incomplete functions for appending the new task made basis of check box (onchange)
 
@@ -82,3 +91,13 @@ var bindTaskEvents=function(itemList,checkboxhandle)
     delebtn.onclick=deleteTask;
     checkb.onchange=checkboxhandle;
 }
+
+for (var i=0; i<incompletelist.children.length;i++){
+
+    //bind events to list items of incomlete list
+    bindTaskEvents(incompletelist.children[i],completeTask);
+}
+for (var i=0; i<completelist.children.length;i++){
+	//bind events to list items of complete list
+		bindTaskEvents(completelist.children[i],incompleteTask);
+	}
