@@ -56,3 +56,18 @@ var deleteTask=function()
     var ul=itemList.parentNode;
     ul.removeChild(itemList);
 }
+//complete and incomplete functions for appending the new task made basis of check box (onchange)
+
+var completeTask=function()
+{
+    var itemList=this.parentNode;
+    incompletelist.appendChild(itemList);
+    bindTaskEvents(itemList,incompleteTask);
+
+}
+var incompleteTask=function()
+{
+    var itemList=this.parentNode;
+    completelist.appendChild(itemList);
+    bindTaskEvents(itemList,completeTask);
+}
