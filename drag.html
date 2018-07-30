@@ -1,0 +1,162 @@
+<html>
+    <head>
+        <title>drag here!</title>
+    </head>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <body>
+        <div id="selector" class="all">
+            <div id="bt1"><label></label><button data-y="move" ondragend="dragEnd(event,'bt')" ondragenter="dragEnter(event)" class="ele" ondragstart="dragStart(event,'bt')"  draggable="true" id="button" vlaue="Button"></button></div>
+            <div id="pa1"><p ondragend="dragEnd(event,'pa')" class="ele " ondragenter="dragEnter(event)" ondragstart="dragStart(event,'pa')"  id="para" draggable="true" value="paragraph"></p></div>
+        </div>
+        <div class="all" id="dropper" ondrop="allowDrop(event)" ondragover="allowDrag(event)" ></div>
+        <div  class="all" id="deletor" ondrop="allowDrop(event)" ondragover="allowDrag(event)"></div>
+        </div>
+        <style>
+            .all
+            {
+                display: inline-block;
+            }
+            #deletor
+            {
+               
+                border: 2px solid red;
+                margin-top: 20%;
+                width: 43%;
+                height: 21%;
+                margin-left: 25%;
+
+            }
+            .dim
+            {
+                resize: "both";
+                overflow:" auto";
+            }
+            
+            #button
+            {
+                background-color: grey;
+                width:30%;
+                height: 20%;
+            }
+            #para
+            {
+                background-color: red;
+                width: 40%;
+                height: 10;
+            }
+            #selector
+            {
+                border:3px solid green;
+                position: absolute;
+                left: auto;
+                width: 45%;
+                height: 50%;
+
+            }
+            #dropper
+            {
+                border:3px solid blue;
+                position: absolute;
+                left: 49%;
+                width: 50%;
+                height: 50%;
+            }
+
+
+        </style>
+        <script>
+            function allowDrag(event) {
+            event.preventDefault();
+            }
+
+            function allowDrop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("Text");
+            event.target.appendChild(document.getElementById(data));
+            
+            }
+            function dragStart(event,ele)
+            {
+            
+                var img= new Image();
+                img.src='add.png';
+                event.dataTransfer.setDragImage(img,5,5);
+                console.log(event.target.id);
+                event.dataTransfer.setData("Text", event.target.id);
+                event.dataTransfer.effectAllowed="copy";
+           
+            }
+            function dragEnd(event,ele)
+            {  
+                var btt=event.dataTransfer.getData("Text");
+                console.log(btt);
+                $(btt).css("background-color","green");
+                    if(ele=="bt")
+                {   console.log($("#bt1 button").length );
+                    if($("#bt1 button").length ==0)
+                    {
+                        $("#bt1").append("<button></button>");
+                        $("button").attr({
+                            ondragend:"dragEnd(event,'bt')",
+                            class:"ele",
+                            ondragEnter:"dragEnter(event)",
+                            ondragstart:"dragStart(event,'bt')",
+                            draggable:"true",
+                            id:"button",
+                            value:"Button"
+                        })
+                    }
+                }
+            
+                else if(ele=="pa")
+                {   console.log($("#pa1 p").length );
+                    if($("#pa1 p").length ==0)
+                    {
+                        $("#pa1").append("<p></p>");
+                        $("p").attr({
+                            ondragend:"dragEnd(event,'pa')",
+                            class:"ele ",
+                            ondragEnter:"dragEnter(event)",
+                            ondragstart:"dragStart(event,'pa')",
+                            id:"para",
+                            draggable:"true",
+                            value:"paragraph"
+
+                        })
+                    }
+                }
+            // $("#dropper button").css({"ondragend":"dragEndDelete(event,'bt')",
+            //  "ondragenter":"dragEnterDelete(event)",
+            // "ondragstart":"dragStartDelete(event,'bt')",
+            //     })
+                
+            }
+            function dragEnter(event)
+            {
+
+            console.log("inside!");
+            event.currentTarget.style.background = "yellow";
+            
+
+                 
+                 
+            }
+                
+                // if(daa=="butt")
+                // $("#button").css({"resize":"both","overflow":"auto"});
+                // else if(daa=="para")
+                // $("#para").css({"resize":"both","overflow":"auto"});
+                //  $("#button").click(function(){
+                //      $("#button").text("<input type='text'/>");
+                //  });
+        
+                //  $("#para").click(function(){
+                //     $("#para").html("<input type='text'/>");
+                //  });
+        
+        </script>
+    </body>
+</html>
